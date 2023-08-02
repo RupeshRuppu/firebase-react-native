@@ -1,9 +1,9 @@
-import {View, Text, SafeAreaView, Alert} from "react-native";
-import React, {useEffect, useState} from "react";
-import messaging from "@react-native-firebase/messaging";
+import {View, Text, SafeAreaView, Alert} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import messaging from '@react-native-firebase/messaging';
 
 const App = () => {
-  const [fcmToken, setFcmToken] = useState("");
+  const [fcmToken, setFcmToken] = useState('');
 
   useEffect(() => {
     /*
@@ -13,11 +13,11 @@ const App = () => {
       messaging()
         .getToken()
         .then(fcmToken => {
-          console.log("fcmToken", fcmToken);
+          console.log('fcmToken', fcmToken);
           setFcmToken(fcmToken);
         })
         .catch(err => {
-          console.log("error happened while getting fcm token", err);
+          console.log('error happened while getting fcm token', err);
         });
     }
 
@@ -29,11 +29,11 @@ const App = () => {
         /* if remotemessage exists it means that app is opened via message. */
         if (remoteMessage) {
           console.log(
-            "notification caused app to open totally from quit state",
+            'notification caused app to open totally from quit state',
           );
         } else {
           console.log(
-            "app opened via another mothod, most likely through manual process.",
+            'app opened via another mothod, most likely through manual process.',
           );
         }
       });
@@ -43,19 +43,19 @@ const App = () => {
     messaging().onNotificationOpenedApp(async remoteMessage => {
       if (remoteMessage) {
         console.log(
-          "notification caused app to open from background state",
+          'notification caused app to open from background state',
           remoteMessage,
         );
       } else {
         console.log(
-          "notification remoteMessage onNotificationOpenedApp is NULL",
+          'notification remoteMessage onNotificationOpenedApp is NULL',
         );
       }
     });
 
     const unsubscribe = messaging().onMessage(async remoteMessage => {
-      console.log("A new FCM message arrived!", JSON.stringify(remoteMessage));
-      Alert.alert("A new FCM message arrived!", JSON.stringify(remoteMessage));
+      console.log('A new FCM message arrived!', JSON.stringify(remoteMessage));
+      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
     });
 
     return () => unsubscribe;
@@ -71,15 +71,15 @@ const App = () => {
         authorizationStatus === PROVISIONAL
       );
     } catch (e) {
-      console.log("authorization failed for message communication.", e);
+      console.log('authorization failed for message communication.', e);
     }
   };
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <Text
-          style={{fontFamily: "Manrope-Bold", fontSize: 30, color: "#000000"}}>
+          style={{fontFamily: 'Manrope-Bold', fontSize: 30, color: '#000000'}}>
           FCM
         </Text>
       </View>
